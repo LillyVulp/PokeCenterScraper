@@ -1,0 +1,13 @@
+{
+  "name": "PokeCenterBot",
+  "version": "2.0.0",
+  "description": "Updates status.json to reflect the status of items on the pokecenter website",
+  "main": "bot.js",
+  "author": "Mikey Richards",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
