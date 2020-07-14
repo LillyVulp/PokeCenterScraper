@@ -3,11 +3,13 @@ const fs = require("fs");
 
 //TODO: Add scraper to fetch updated auth token at the start of each week
 const headers = {
-	"Authorization": process.env.token;
+	"Authorization": process.env.token,
+	"Origin": "https://www.pokemoncenter.com"
 }
 
 //Once every 5 minutes, call fetchStatusFile
 setInterval(fetchStatusFile, 300000);
+fetchStatusFile()
 
 //Read status.json and pass contents to parseStatusFile
 function fetchStatusFile() {
