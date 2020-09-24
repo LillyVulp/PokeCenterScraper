@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
-var errorCount = 0
+var errorCount = 0;
+var itemLength = 0;
 
 const headers = {
 	"Authorization": "",
@@ -10,6 +11,7 @@ const headers = {
 //TODO: Add scraper to fetch updated auth token at the start of each week
 //Read token.txt and pass contents to fetchStatusFile
 function fetchToken() {
+	itemLength = 0;
 	fs.readFile("token.txt", "utf8", fetchStatusFile);
 }
 
@@ -46,6 +48,7 @@ function parseStatusFile(err, data) {
 
 //For each item in the list, call updateItemStatus, then pass the results to updateStatusFile
 async function updateItems(itemList) {
+	itemLength = itemList.length;
 	for(var i=0; i<itemList.length; i++) {
 		itemList[i] = await updateItemStatus(itemList[i]);
 	}
@@ -95,7 +98,7 @@ async function getStatus(url, oldStatus) {
 			}
 			else {
 				errorCount++;
-				if(errorCount > 1) {
+				if(errorCount > itemLength) {
 					return "unknown";
 				}
 				else {
